@@ -58,7 +58,7 @@ $lista_servicios2=$sentencia->fetchAll(PDO::FETCH_ASSOC);
       <section class="center">
 
          <form action="buscar.php" method="post">
-            <h3>Encuentra tu sitio ideal</h3>
+            <h3>Encuentra tu sitio ideal 2.0</h3>
 
             <div class="flex">
                <div class="box">
