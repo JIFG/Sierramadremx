@@ -7,10 +7,9 @@ $lista_servicios=$sentencia->fetchAll(PDO::FETCH_ASSOC);
 $sentencia=$conexion->prepare("SELECT * FROM `tbl_propiedades`");
 $sentencia->execute();
 $lista_servicios2=$sentencia->fetchAll(PDO::FETCH_ASSOC);
-
 ?>
 
-
+asdasdad
 <!DOCTYPE html>
 <html lang="en">
 
