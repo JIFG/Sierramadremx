@@ -7,6 +7,8 @@ if ($_POST) {
   $precio = (isset($_POST['precio'])) ? $_POST['precio'] : "";
   $tipo = (isset($_POST['tipo'])) ? $_POST['tipo'] : "";
   $ubicacion = (isset($_POST['ubicacion'])) ? $_POST['ubicacion'] : "";
+  $longitud = (isset($_POST['longitud'])) ? $_POST['longitud'] : "";
+  $latitud= (isset($_POST['latitud'])) ? $_POST['latitud'] : "";
   $img_01 = (isset($_FILES['img01']['name'])) ? $_FILES['img01']['name'] : "";
   $img_02 = (isset($_FILES['img02']['name'])) ? $_FILES['img02']['name'] : "";
   $img_03 = (isset($_FILES['img03']['name'])) ? $_FILES['img03']['name'] : "";
@@ -14,6 +16,7 @@ if ($_POST) {
   $img_05 = (isset($_FILES['img05']['name'])) ? $_FILES['img05']['name'] : "";
   $descripcion = (isset($_POST['descripcion'])) ? $_POST['descripcion'] : "";
   $localidad = (isset($_POST['localidad'])) ? $_POST['localidad'] : "";
+  $servicio = (isset($_POST['servicio'])) ? $_POST['servicio'] : "";
 
   $fecha_imagen = new DateTime();
   $nombre_archivo_imagen1 = ($img_01 != "")? $fecha_imagen->getTimestamp()."_".$img_01:"";
@@ -43,6 +46,8 @@ if ($_POST) {
     move_uploaded_file($tmp_imagen5, "../../../images/casas/".$nombre_archivo_imagen5);
   }
 
+  
+
 
 
 
@@ -50,8 +55,8 @@ if ($_POST) {
 
 
     $sentencia=$conexion->prepare("INSERT INTO `tbl_propiedades` 
-    (`ID`, `titulo`, `precio`, `tipo`, `ubicacion`, `IMG_01`, `IMG_02`, `IMG_03`, `IMG_04`, `IMG_05`, `descripcion`, `localidad`) 
-    VALUES (NULL, :titulo, :precio, :tipo, :ubicacion, :img_01, :img_02, :img_03, :img_04, :img_05, :descripcion, :localidad);");
+    (`ID`, `titulo`, `precio`, `tipo`, `ubicacion`, `IMG_01`, `IMG_02`, `IMG_03`, `IMG_04`, `IMG_05`, `descripcion`, `localidad`, `servicio`) 
+    VALUES (NULL, :titulo, :precio, :tipo, :ubicacion, latitud, longitud :img_01, :img_02, :img_03, :img_04, :img_05, :descripcion, :localidad, :servicio);");
 
     $sentencia->bindParam(":titulo",$titulo);
     $sentencia->bindParam(":precio",$precio);
@@ -64,13 +69,37 @@ if ($_POST) {
     $sentencia->bindParam(":img_05",$nombre_archivo_imagen5);
     $sentencia->bindParam(":descripcion",$descripcion);
     $sentencia->bindParam(":localidad",$localidad);
+    $sentencia->bindParam(":servicio",$servicio);
+    $sentencia->bindParam(":latitud",$latitud);
+    $sentencia->bindParam(":longitud",$longitud);
     
     $sentencia->execute();
     $mensaje="Registro agregado con exito";
   header("Location:index.php?mensaje=".$mensaje);
 
 }
+
+$sentencia=$conexion->prepare("SELECT * FROM `precios`");
+$sentencia->execute();
+$precios=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+$sentencia=$conexion->prepare("SELECT * FROM `lugares`");
+$sentencia->execute();
+$lugares=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+$sentencia=$conexion->prepare("SELECT * FROM `estados`");
+$sentencia->execute();
+$estados=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+$sentencia=$conexion->prepare("SELECT * FROM `servicio`");
+$sentencia->execute();
+$servicio=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
 include("../../templates/header.php");
+
+
+
+
 ?>
 <div class="card">
     <div class="card-header">
@@ -91,15 +120,37 @@ include("../../templates/header.php");
       <input type="text"
         class="form-control" name="precio" id="precio" aria-describedby="helpId" placeholder="precio">
     </div>
+    
+    <div class="mb-3">
+    <label for="tipo" class="form-label">Tipo de servicio:</label>
+      <select name="tipo" class="input" required>
+                  <?php foreach($lugares as $registros){ ?>
+                     <option value="<?php echo $registros['lugares'];?>"><?php echo $registros['lugares'];?></option>
+                     <?php } ?>
+                     
+      </select>
+
+    </div>
+    
     <div class="mb-3">
       <label for="tipo" class="form-label">tipo:</label>
       <input type="text"
-        class="form-control" name="tipo" id="tipo" aria-describedby="helpId" placeholder="precio">
+        class="form-control" name="tipo" id="tipo" aria-describedby="helpId" placeholder="tipo">
     </div>
     <div class="mb-3">
       <label for="ubicacion" class="form-label">ubicacion:</label>
       <input type="text"
-        class="form-control" name="ubicacion" id="ubicacion" aria-describedby="helpId" placeholder="precio">
+        class="form-control" name="ubicacion" id="ubicacion" aria-describedby="helpId" placeholder="ubicacion">
+    </div>
+    <div class="mb-3">
+      <label for="latitud" class="form-label">latitud:</label>
+      <input type="text"
+        class="form-control" name="latitud" id="latitud" aria-describedby="helpId" placeholder="latitud">
+    </div>
+    <div class="mb-3">
+      <label for="longitud" class="form-label">longitud:</label>
+      <input type="text"
+        class="form-control" name="longitud" id="longitud" aria-describedby="helpId" placeholder="longitud">
     </div>
     <div class="mb-3">
       <label for="img01" class="form-label">IMG_01:</label>
@@ -128,17 +179,49 @@ include("../../templates/header.php");
     </div>
     
     <div class="mb-3">
-      <label for="descripcion" class="form-label">Descripción</label>
+      <label for="descripcion" class="form-label">Descripción:</label>
       <input type="text"
         class="form-control" name="descripcion" id="descripcion" aria-describedby="helpId" placeholder="Descripción">
     </div>
+
     <div class="mb-3">
-      <label for="localidad" class="form-label">Localidad</label>
+    <label for="localidad" class="form-label">Servicio:</label>
+      <select name="localidad" class="input" required>
+                  <?php foreach($lugares as $registros){ ?>
+                     <option value="<?php echo $registros['lugares'];?>"><?php echo $registros['lugares'];?></option>
+                     <?php } ?>
+                     
+      </select>
+
+    </div>
+
+    
+    <div class="mb-3">
+      <label for="localidad" class="form-label">Localidad:</label>
       <input type="text"
         class="form-control" name="localidad" id="localidad" aria-describedby="helpId" placeholder="localidad">
     </div>
 
-    <button type="submit" class="btn btn-success">Agregar</button>
+
+    <div class="mb-3">
+    <label for="localidad" class="form-label">Servicio:</label>
+      <select name="localidad" class="input" required>
+                  <?php foreach($lugares as $registros){ ?>
+                     <option value="<?php echo $registros['lugares'];?>"><?php echo $registros['lugares'];?></option>
+                     <?php } ?>
+                     
+      </select>
+
+    </div>
+
+
+    <div class="mb-3">
+      <label for="localidad" class="form-label">Servicio:</label>
+      <input type="text"
+        class="form-control" name="localidad" id="localidad" aria-describedby="helpId" placeholder="localidad">
+    </div>
+
+    <button type="submit" class="btn btn-success">Agregar:</button>
 
     <a name="" id="" class="btn btn-primary" href="index.php" role="button">Cancelar</a>
 

@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Mapa SVG de Google Maps</title>
+</head>
+<body>
+  <svg id="map" width="400" height="400"></svg>
+
+  <script>
+    // Opcionalmente, también puedes agregar un enlace para abrir el mapa en Google Maps
+    var googleMapsUrl = 'https://www.google.com/maps/search/?api=1&query=24.024102,-104.670254';
+    var linkElement = document.createElement('a');
+    linkElement.href = googleMapsUrl;
+    linkElement.target = '_blank';
+    linkElement.textContent = 'Ver en Google Maps';
+    document.body.appendChild(linkElement);
+  </script>
+</body>
+</html>

@@ -17,8 +17,12 @@ if (isset($_GET['txtID'])) {
     $img04 = $registro['IMG_04'];
     $img05 = $registro['IMG_05'];
     $ubicacion = $registro['ubicacion'];
+    $longitud = $registro['longitud'];
+    $latitud = $registro['latitud'];
     $tipo = $registro['tipo'];
     $localidad = $registro['localidad'];
+    $servicio = $registro['servicio']; // Agregado
+
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -27,8 +31,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $precio = isset($_POST['precio']) ? $_POST['precio'] : "";
     $tipo = isset($_POST['tipo']) ? $_POST['tipo'] : "";
     $ubicacion = isset($_POST['ubicacion']) ? $_POST['ubicacion'] : "";
+    $longitud = isset($_POST['longitud']) ? $_POST['longitud'] : "";
+    $latitud = isset($_POST['latitud']) ? $_POST['latitud'] : "";
     $descripcion = isset($_POST['descripcion']) ? $_POST['descripcion'] : "";
     $localidad = isset($_POST['localidad']) ? $_POST['localidad'] : "";
+    $servicio = (isset($_POST['servicio'])) ? $_POST['servicio'] : "";
 
     $sentencia = $conexion->prepare("UPDATE tbl_propiedades
         SET 
@@ -36,16 +43,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         precio = :precio,
         tipo = :tipo,
         ubicacion = :ubicacion,
+        latitud = :latitud,
+        longitud = :longitud,
         descripcion = :descripcion,
-        localidad = :localidad
+        localidad = :localidad,
+        servicio= :servicio
         WHERE id = :id");
 
     $sentencia->bindParam(":titulo", $titulo);
     $sentencia->bindParam(":precio", $precio);
     $sentencia->bindParam(":tipo", $tipo);
     $sentencia->bindParam(":ubicacion", $ubicacion);
+    $sentencia->bindParam(":latitud", $latitud);
+    $sentencia->bindParam(":longitud", $longitud);
     $sentencia->bindParam(":descripcion", $descripcion);
     $sentencia->bindParam(":localidad", $localidad);
+    $sentencia->bindParam(":servicio",$servicio);
     $sentencia->bindParam(":id", $txtID);
 
     $sentencia->execute();
@@ -137,6 +150,16 @@ include("../../templates/header.php");
         class="form-control" value="<?php echo $ubicacion;?>" name="ubicacion" id="ubicacion" aria-describedby="helpId" placeholder="precio">
     </div>
     <div class="mb-3">
+      <label for="ubicacion" class="form-label">latitud:</label>
+      <input type="text"
+        class="form-control" value="<?php echo $latitud;?>" name="latitud" id="latitud" aria-describedby="helpId" placeholder="latitud">
+    </div>
+    <div class="mb-3">
+      <label for="ubicacion" class="form-label">longitud:</label>
+      <input type="text"
+        class="form-control" value="<?php echo $longitud;?>" name="longitud" id="longitud" aria-describedby="helpId" placeholder="longitud">
+    </div>
+    <div class="mb-3">
       <label for="img01" class="form-label">IMG_01:</label>
       <img width="50" src="../../../images/casas/<?php echo $img01;?>"/>
       <br>
@@ -174,7 +197,12 @@ include("../../templates/header.php");
     <div class="mb-3">
       <label for="localidad" class="form-label">Localidad</label>
       <input type="text"
-        class="form-control" value="<?php echo $localidad;?> "name="localidad" id="localidad" aria-describedby="helpId" placeholder="localidad">
+        class="form-control" value="<?php echo $localidad;?>" name="localidad" id="localidad" aria-describedby="helpId" placeholder="localidad">
+    </div>
+    <div class="mb-3">
+      <label for="localidad" class="form-label">Servicio:</label>
+      <input type="text"
+        class="form-control"value="<?php echo $servicio;?>" name="servicio" id="servicio" aria-describedby="helpId" placeholder="servicio">
     </div>
 
     <button type="submit" class="btn btn-success">Actualizar</button>

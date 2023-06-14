@@ -1,3 +1,12 @@
+<?php include './admin/bd.php';
+
+$sentencia=$conexion->prepare("SELECT * FROM `tbl_configuraciones`");
+$sentencia->execute();
+$lista_configuraciones=$sentencia->fetchAll(PDO::FETCH_ASSOC);
+
+?>
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,18 +26,18 @@
 
 
    <div class="box">
-      <a href="index.php"><span>Inicio</span></a>
-      <a href="acerca.php"><span>Acerca de</span></a>
-      <a href="contacto.php"><span>Contacto</span></a>
-      <a href="lista.php"><span>Propiedades</span></a>
+      <a href="index.php"><span><?php echo $lista_configuraciones[9]['valor']; ?></span></a>
+      <a href="acerca.php"><span><?php echo $lista_configuraciones[10]['valor']; ?></span></a>
+      <a href="contacto.php"><span><?php echo $lista_configuraciones[11]['valor']; ?></span></a>
+      <a href="lista.php"><span><?php echo $lista_configuraciones[12]['valor']; ?></span></a>
     
    </div>
 
    <div class="box">
-      <a href="#"><span>facebook</span><i class="fab fa-facebook-f"></i></a>
-      <a href="#"><span>twitter</span><i class="fab fa-twitter"></i></a>
-      <a href="#"><span>linkedin</span><i class="fab fa-linkedin"></i></a>
-      <a href="#"><span>instagram</span><i class="fab fa-instagram"></i></a>
+      <a href="#"><span><span><?php echo $lista_configuraciones[13]['valor']; ?></span><i class="fab fa-facebook-f"></i></a>
+      <a href="#"><span><span><?php echo $lista_configuraciones[14]['valor']; ?></span><i class="fab fa-twitter"></i></a>
+      <a href="#"><span><span><?php echo $lista_configuraciones[15]['valor']; ?></span><i class="fab fa-linkedin"></i></a>
+      <a href="#"><span><span><?php echo $lista_configuraciones[16]['valor']; ?></span><i class="fab fa-instagram"></i></a>
 
    </div>
    <div class="box">

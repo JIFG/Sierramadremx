@@ -36,9 +36,12 @@ if(!isset($_SESSION['usuario'])){
   <nav class="navbar navbar-expand navbar-light bg-light">
       <div class="nav navbar-nav">
           <a class="nav-item nav-link active" href="#" aria-current="page">Administrador <span class="visually-hidden">(current)</span></a>
-          <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/servicios/">servicios</a>
-          <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/propiedades/">propiedades</a>
-          <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/entradas/">Entradas</a>
+          <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/servicios/">Servicios</a>
+          <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/propiedades/">Propiedades</a>
+          <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/estados/">Estados</a>
+          <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/servicio/">Servicios</a>
+          <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/lugares/">Lugar</a>
+          <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/precios/">Precios</a>
           <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/configuraciones/">Configuraciones</a>
           <a class="nav-item nav-link" href="<?php echo $url_base;?>secciones/usuarios/">Usuarios</a>
           <a class="nav-item nav-link" href="<?php echo $url_base;?>cerrar.php">Cerrar Sesión</a>

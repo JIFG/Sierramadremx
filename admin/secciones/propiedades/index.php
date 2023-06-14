@@ -55,6 +55,8 @@ include("../../templates/header.php");?>
                     <th scope="col">Precio</th>
                     <th scope="col">tipo</th>
                     <th scope="col">ubicación</th>
+                    <th scope="col">latitud</th>
+                    <th scope="col">longitud</th>
                     <th scope="col">IMG_01</th>
                     <th scope="col">IMG_02</th>
                     <th scope="col">IMG_03</th>
@@ -62,6 +64,7 @@ include("../../templates/header.php");?>
                     <th scope="col">IMG_05</th>
                     <th scope="col">Descripción</th>
                     <th scope="col">Localidad</th>
+                    <th scope="col">Servicio</th>
                     <th scope="col">Acciones</th>
                 </tr>
             </thead>
@@ -74,6 +77,8 @@ include("../../templates/header.php");?>
                     <td ><?php echo $registros['precio'];?></td>
                     <td ><?php echo $registros['tipo'];?></td>
                     <td ><?php echo $registros['ubicacion'];?></td>
+                    <td ><?php echo $registros['latitud'];?></td>
+                    <td ><?php echo $registros['longitud'];?></td>
                     <td scope="col">
                         <img width="50" src="../../../images/casas/<?php echo $registros['IMG_01'];?>"/>
             </td>
@@ -91,6 +96,7 @@ include("../../templates/header.php");?>
             </td>
                     <td ><?php echo $registros['descripcion'];?></td>
                     <td ><?php echo $registros['localidad'];?></td>
+                    <td ><?php echo $registros['servicio'];?></td>
                     <td>
                     <a name="" id="" class="btn btn-info" href="editar.php?txtID=<?php echo $registros['ID'];?>">Editar</a>
                     |

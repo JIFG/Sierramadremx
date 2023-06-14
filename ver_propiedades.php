@@ -18,24 +18,37 @@ if (isset($_GET['get_id'])) {
    <meta charset="UTF-8">
    <meta http-equiv="X-UA-Compatible" content="IE=edge">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>View Property</title>
+   <title>Ver Propiedad</title>
 
-   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+   
 
    <!-- font awesome cdn link  -->
-   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  
 
    <!-- custom css file link  -->
    <link rel="stylesheet" href="./css/estilos.css">
+   <link rel="stylesheet" href="./css/estilos3.css">
+
+   <link rel="stylesheet" href="./css/style.css">
+
+   
+
 
 </head>
 <body>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<a href="https://api.whatsapp.com/send?phone=526182744225&text=Hola,%20me%20gustaria%20Obtener%20m%C3%A1s%20informaci%C3%B3n" class="float" target="_blank">
+<i class="fab fa-whatsapp my-float"></i>
+</a>
    <!-- view property section starts  -->
    <section class="view-property">
       <h1 class="heading">Detalles</h1>
                <div class="details">
-               <div class="swiper images-container">
-               <div class="swiper-wrapper">
+                  
+                  <div class="swiper images-container">
+                     <div class="swiper-wrapper">
                         <?php if(!empty($fetch_property['IMG_01'])){ ?>
                         <img src="./images/casas/<?= $fetch_property['IMG_01']; ?>" alt="" class="swiper-slide">
                         <?php } ?>
@@ -60,13 +73,32 @@ if (isset($_GET['get_id'])) {
                      <p><i class="fa-solid fa-sack-dollar"></i><span><?= $fetch_property['precio']; ?></span></p>
                      <p><i class="fas fa-house"></i><span><?= $fetch_property['tipo']; ?></span></p>
                      <p><i class="fa-solid fa-earth-americas"></i><span><?= $fetch_property['localidad']; ?></span></p>
+                     <p> <i class="fa-solid fa-landmark"></i></i><span><?= $fetch_property['servicio']; ?></span></p>
                   </div>
-                  <h3 class="title">Descripcion</h3>
+                  
+                  <h3 class="title">Descripción</h3>
+                  <br>
                   <p class="description"><?= $fetch_property['descripcion']; ?></p>
+                  <br>
+                  <br>
+                  <h3 class="title">Ubicación</h3>
+                  <br>
+                  <a class="inline-btn" href="https://www.google.com/maps/search/?api=1&query=<?php echo $fetch_property['latitud']; ?>,<?php echo $fetch_property['longitud']; ?>" target="_blank">Ver en Google Maps</a>
+                  <br>
+                  <br>
+                  <br>
+                  <br>
+
+                  <h3 class="title">Contáctanos</h3>
+                  
+                  <br>
                   <form action="" method="post" class="flex-btn">
                      <input type="hidden" name="property_id" value="<?= $property_id; ?>">
                      <a href="contacto.php" class="inline-btn">Mandar mensaje</a>
                   </form>
+                  <br>
+                  <br>
+                  <br>
                </div>
                <?php
             }
@@ -87,26 +119,9 @@ if (isset($_GET['get_id'])) {
    <?php include 'componentes/footer.php'; ?>
    <script src="js/script.js"></script>
    <?php include 'componentes/mensaje.php'; ?>
+   
 
-   <script>
-   var swiper = new Swiper(".images-container", {
-      effect: "coverflow",
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: "auto",
-      loop: true,
-      coverflowEffect: {
-         rotate: 0,
-         stretch: 0,
-         depth: 200,
-         modifier: 3,
-         slideShadows: true,
-      },
-      pagination: {
-         el: ".swiper-pagination",
-      },
-   });
-   </script>
+
 
 </body>
 </html>

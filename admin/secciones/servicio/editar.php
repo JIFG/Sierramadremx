@@ -3,27 +3,24 @@ include("../../bd.php");
 
 if (isset($_GET['txtID'])) {
     $txtID = isset($_GET['txtID']) ? $_GET['txtID'] : "";
-    $sentencia = $conexion->prepare("SELECT * FROM tbl_configuraciones WHERE id=:id");
+    $sentencia = $conexion->prepare("SELECT * FROM servicio WHERE id=:id");
     $sentencia->bindParam(":id", $txtID);
     $sentencia->execute();
     $registro = $sentencia->fetch(PDO::FETCH_ASSOC);
 
-    $nombreconfiguracion = $registro['nombreconfiguracion'];
-    $valor = $registro['valor'];
+    $servicio = $registro['servicio'];
 }
 
 if ($_POST) {
     // Recepcionamos los valores del formulario
     $txtID = isset($_POST['txtID']) ? $_POST['txtID'] : "";
-    $nombreconfiguracion = (isset($_POST['nombreconfiguracion'])) ? $_POST['nombreconfiguracion'] : "";
-    $valor = (isset($_POST['valor'])) ? $_POST['valor'] : "";
+    $servicio = (isset($_POST['servicio'])) ? $_POST['servicio'] : "";
     
-      $sentencia=$conexion->prepare("UPDATE `tbl_configuraciones` SET
+      $sentencia=$conexion->prepare("UPDATE `servicio` SET
       id=:id,
-      nombreconfiguracion=:nombreconfiguracion,valor=:valor WHERE id=:id ;");
+      servicio=:servicio WHERE id=:id ;");
   
-      $sentencia->bindParam(":nombreconfiguracion",$nombreconfiguracion);
-      $sentencia->bindParam(":valor",$valor);
+      $sentencia->bindParam(":servicio",$servicio);
       $sentencia->bindParam(":id",$txtID);
       
       $sentencia->execute();
@@ -53,18 +50,12 @@ include("../../templates/header.php");?>
             </div>
           
             <div class="mb-3">
-              <label for="nombreconfiguracion" class="form-label">Nombre:</label>
-              <input value="<?php echo $nombreconfiguracion; ?>"  type="text"
-                class="form-control" name="nombreconfiguracion" id="nombreconfiguracion" aria-describedby="helpId" placeholder="Nombre de la configuración">
+              <label for="servicio" class="form-label">Servicio:</label>
+              <input value="<?php echo $servicio; ?>"  type="text"
+                class="form-control" name="servicio" id="servicio" aria-describedby="helpId" placeholder="Nombre del servicio">
               
             </div>
 
-            <div class="mb-3">
-              <label for="valor" class="form-label">Valor:</label>
-              <input value="<?php echo $valor; ?>"   type="text"
-                class="form-control" name="valor" id="valor" aria-describedby="helpId" placeholder="Valor de la configuración">
-              
-            </div>
             <button type="submit" class="btn btn-success">Actualizar</button>
 
             <a name="" id="" class="btn btn-primary" href="index.php" role="button">Cancelar</a>

@@ -9,7 +9,10 @@ include("admin/bd.php");
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Propiedades</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
    <link rel="stylesheet" href="./css/estilos.css">
+   <link rel="stylesheet" href="./css/estilos2.css">
+   <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
       <!--Inicio del Header-->
@@ -17,14 +20,18 @@ include("admin/bd.php");
    include './componentes/header.php';
 
    ?>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+<a href="https://api.whatsapp.com/send?phone=526182744225&text=Hola,%20me%20gustaria%20Obtener%20m%C3%A1s%20informaci%C3%B3n" class="float" target="_blank">
+<i class="fab fa-whatsapp my-float"></i>
+</a>
 
    <!--final del Header-->
     <!--Inicio de la lista-->
-    <section class="listings">
+    <section class="lista">
 
 <h1 class="heading"> Ver Propiedades</h1>
 
-<div class="box-container">
+<div class="box-contenedor">
    <?php
 
    $total_images = 0;
@@ -74,16 +81,17 @@ include("admin/bd.php");
             </div>
             <div class="box">
                <h1 class="name"><?= $fetch_property['titulo']; ?></h1>
-               <div class="price"><i class="fa-solid fa-sack-dollar"></i></i><span><?= $fetch_property['precio']; ?></span></div>
+               <div class="location"><i class="fa-solid fa-sack-dollar"></i></i><span><?= $fetch_property['precio']; ?></span></div>
 
                <p class="location"><i class="fas fa-map-marker-alt"></i><span><?= $fetch_property['ubicacion']; ?></span></p>
                <div class="flex">
                   <p><i class="fas fa-house"></i><span><?= $fetch_property['tipo']; ?></span></p>
                   <p><i class="fa-solid fa-earth-americas"></i><span><?= $fetch_property['localidad']; ?></span></p>
+                  <p><i class="fa-solid fa-landmark"></i><span><?= $fetch_property['servicio']; ?></span></p>
 
                </div>
-               <div class="flex-btn">
-                  <a href="ver_propiedades.php?get_id=<?= $fetch_property['ID']; ?>" class="btn">Ver propiedad</a>
+               <div class="boton1">
+                  <a href="ver_propiedades.php?get_id=<?= $fetch_property['ID']; ?>" class="boton">Ver propiedad</a>
 
                </div>
             </div>
