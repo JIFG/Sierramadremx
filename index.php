@@ -139,7 +139,7 @@ $servicio = $sentencia->fetchAll(PDO::FETCH_ASSOC);
       <div class="box-container">
       <?php foreach($lista_servicios as $registros){ ?>
          <div class="box">
-         <i class= "fas <?php echo $registros["icono"];?>"></i>
+         <i class= "fas <?php echo $registros["imagen"];?>"></i>
             <h3> <?php echo $registros["titulo"];?></h3>
             <p><?php echo $registros["descripción"];?></p>
          </div>

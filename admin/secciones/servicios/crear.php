@@ -37,7 +37,11 @@ include("../../templates/header.php");?>
       <input type="text"
          class="form-control" name="icono" id="icono" aria-describedby="helpId" placeholder="Icono">
     </div>
-
+    <div class="mb-3">
+      <label for="img01" class="form-label">IMG_01:</label>
+      <input type="file"
+        class="form-control" name="img01" id="img01" aria-describedby="helpId" placeholder="precio">
+    </div>
     <div class="mb-3">
       <label for="titulo" class="form-label">Titulo:</label>
       <input type="text"
